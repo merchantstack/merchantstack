@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site/shell";
 import { ProductCard } from "@/components/site/product-card";
 import { storefrontQuery, DEFAULT_SETTINGS } from "@/lib/storefront";
-import type { Category, Product } from "@/lib/types";
+import type { Category, Product, StoreSettings } from "@/lib/types";
 
 export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(storefrontQuery),
@@ -68,10 +68,10 @@ const VALUE_PROPS = [
 
 function HomePage() {
   const { data } = useSuspenseQuery(storefrontQuery);
-  const settings = (data.settings ?? DEFAULT_SETTINGS) as typeof DEFAULT_SETTINGS;
+  const settings = (data.settings ?? DEFAULT_SETTINGS) as unknown as StoreSettings;
   const symbol = settings.currency_symbol || "$";
-  const categories = (data.categories ?? []) as Category[];
-  const products = (data.products ?? []) as Product[];
+  const categories = (data.categories ?? []) as unknown as Category[];
+  const products = (data.products ?? []) as unknown as Product[];
   const featured = products.filter((p) => p.featured).slice(0, 6);
   const shown = featured.length ? featured : products.slice(0, 6);
   const home = settings.homepage_content ?? {};

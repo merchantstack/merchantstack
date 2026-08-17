@@ -1,5 +1,6 @@
 import { queryOptions } from "@tanstack/react-query";
 import { getStorefront, getProductBySlug } from "./catalog.functions";
+import type { StoreSettings } from "./types";
 
 export const storefrontQuery = queryOptions({
   queryKey: ["storefront"],
@@ -14,7 +15,7 @@ export const productQuery = (slug: string) =>
     staleTime: 60_000,
   });
 
-export const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS: StoreSettings = {
   brand_name: "MerchantStack",
   tagline: "Commerce infrastructure for modern businesses.",
   logo_url: null,
