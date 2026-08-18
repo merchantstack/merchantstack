@@ -16,7 +16,11 @@ import { ProductCard } from "@/components/site/product-card";
 import { storefrontQuery, DEFAULT_SETTINGS } from "@/lib/storefront";
 import type { Category, Product, StoreSettings } from "@/lib/types";
 
-type ShopSearch = { q?: string; category?: string; sort?: string };
+type ShopSearch = {
+  q?: string | undefined;
+  category?: string | undefined;
+  sort?: string | undefined;
+};
 
 export const Route = createFileRoute("/shop")({
   validateSearch: (search: Record<string, unknown>): ShopSearch => ({
