@@ -1,10 +1,16 @@
 import { createClient } from "@supabase/supabase-js";
 
 /** Publishable-key Supabase client for public, read-only server-side reads. */
+/** Public fallbacks: these values are publishable and safe to ship. */
+const FALLBACK_URL = "https://vnbyyfchbgatqacpsuqx.supabase.co";
+const FALLBACK_KEY = "sb_publishable_eVMFEB9ulmfHcwirEdB5rA_IzhY9PA-";
+
 export function createPublicClient() {
-  const url = process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"]!;
+  const url = process.env["SUPABASE_URL"] ?? process.env["VITE_SUPABASE_URL"] ?? FALLBACK_URL;
   const key =
-    process.env["SUPABASE_PUBLISHABLE_KEY"] ?? process.env["VITE_SUPABASE_PUBLISHABLE_KEY"]!;
+    process.env["SUPABASE_PUBLISHABLE_KEY"] ??
+    process.env["VITE_SUPABASE_PUBLISHABLE_KEY"] ??
+    FALLBACK_KEY;
 
   return createClient(url, key, {
     auth: { persistSession: false, autoRefreshToken: false },

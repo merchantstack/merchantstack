@@ -197,6 +197,103 @@ function HomePage() {
           ))}
         </div>
       </section>
+
+      <section className="border-y border-border/60 bg-surface/40">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+          <h2 className="text-2xl font-semibold sm:text-3xl">How buying works here</h2>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            No accounts, no card forms, no waiting on a support queue. Three steps, one
+            conversation.
+          </p>
+          <ol className="mt-10 grid gap-5 md:grid-cols-3">
+            {[
+              [
+                "01",
+                "Pick what you need",
+                "Add flows, tools or a service package to your cart. Mix templates and done-for-you work freely.",
+              ],
+              [
+                "02",
+                "Send the order on WhatsApp",
+                "Checkout turns your cart into a clean, itemised message. You confirm details in chat with a real person.",
+              ],
+              [
+                "03",
+                "Get it delivered",
+                "Templates arrive instantly. Services start with a short scoping call and an agreed timeline.",
+              ],
+            ].map(([step, title, body]) => (
+              <li key={step} className="surface-panel rounded-2xl p-6">
+                <span className="font-display text-sm font-semibold text-accent">{step}</span>
+                <h3 className="mt-3 text-base font-semibold">{title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <h2 className="text-2xl font-semibold sm:text-3xl">What merchants say</h2>
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
+          {[
+            [
+              "We swapped three half-finished Klaviyo flows for the abandoned cart and win-back templates. Recovered revenue was up inside the first fortnight.",
+              "Tolu A.",
+              "Head of Growth, apparel DTC",
+            ],
+            [
+              "The Merchant Center feed cleanup paid for itself. Disapprovals went from 400-odd items to single digits.",
+              "Daniel R.",
+              "Ecommerce Manager, home goods",
+            ],
+            [
+              "Ordering over WhatsApp felt odd at first, then genuinely faster. Questions answered, files sent, done in an afternoon.",
+              "Priya S.",
+              "Founder, skincare brand",
+            ],
+          ].map(([quote, name, role]) => (
+            <figure key={name} className="surface-panel flex h-full flex-col rounded-2xl p-6">
+              <blockquote className="text-sm leading-relaxed text-foreground/90">
+                “{quote}”
+              </blockquote>
+              <figcaption className="mt-5 border-t border-border/60 pt-4 text-sm">
+                <span className="font-medium">{name}</span>
+                <span className="block text-xs text-muted-foreground">{role}</span>
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 pb-24 sm:px-6">
+        <h2 className="text-2xl font-semibold sm:text-3xl">Common questions</h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {[
+            [
+              "How are templates delivered?",
+              "Flow templates and snippet packs are sent as importable files with setup notes, straight after your order is confirmed on WhatsApp.",
+            ],
+            [
+              "Do services include implementation?",
+              "Yes. SEO, GA4 and Merchant Center packages are done-for-you engagements with a scoping call, agreed deliverables and a handover doc.",
+            ],
+            [
+              "Can I pay in another currency?",
+              "Prices are listed in USD, but we invoice in GBP, EUR or NGN on request. Just say so in the chat.",
+            ],
+            [
+              "What if a template does not fit my store?",
+              "Tell us your setup before ordering. If it is not a fit we will say so, and we can quote a customised version instead.",
+            ],
+          ].map(([q, a]) => (
+            <div key={q} className="surface-panel rounded-2xl p-6">
+              <h3 className="text-base font-semibold">{q}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{a}</p>
+            </div>
+          ))}
+        </div>
+      </section>
     </SiteShell>
   );
 }
