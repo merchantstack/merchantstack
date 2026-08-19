@@ -17,7 +17,7 @@ export function ProductCard({ product, symbol = "$" }: { product: Product; symbo
       <Link
         to="/products/$slug"
         params={{ slug: product.slug }}
-        className="relative block aspect-[4/3] overflow-hidden bg-surface-2"
+        className="relative block aspect-[4/3] overflow-hidden bg-surface-2 p-3"
       >
         {product.thumbnail ? (
           <img
@@ -26,7 +26,7 @@ export function ProductCard({ product, symbol = "$" }: { product: Product; symbo
             loading="lazy"
             width={1200}
             height={900}
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full rounded-xl object-contain transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : null}
         <div className="absolute left-3 top-3 flex gap-2">

@@ -130,14 +130,14 @@ function ProductPage() {
         </nav>
 
         <div className="mt-8 grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="surface-panel overflow-hidden rounded-3xl">
+          <div className="surface-panel flex items-center justify-center overflow-hidden rounded-3xl bg-surface-2 p-4">
             {product.thumbnail ? (
               <img
                 src={product.thumbnail}
                 alt={`${product.name} product image`}
                 width={1200}
                 height={900}
-                className="h-full w-full object-cover"
+                className="max-h-[460px] w-full rounded-2xl object-contain"
               />
             ) : null}
           </div>
