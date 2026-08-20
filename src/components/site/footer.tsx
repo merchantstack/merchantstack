@@ -10,11 +10,11 @@ export function SiteFooter() {
   const categories = (data?.categories ?? []).slice(0, 6);
 
   return (
-    <footer className="mt-24 border-t border-border/70 bg-surface/60">
+    <footer className="mt-24 border-t border-border bg-surface">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5">
-            <span className="grid size-9 place-items-center rounded-xl bg-primary text-primary-foreground">
+            <span className="grid size-9 place-items-center rounded-sm bg-primary text-primary-foreground">
               <Layers className="size-5" />
             </span>
             <span className="font-display text-lg font-semibold">{settings.brand_name}</span>

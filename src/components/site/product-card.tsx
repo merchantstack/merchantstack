@@ -13,7 +13,7 @@ export function ProductCard({ product, symbol = "$" }: { product: Product; symbo
   const off = discountPercent(product.price, product.compare_at_price);
 
   return (
-    <article className="group surface-panel relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:border-primary/50">
+    <article className="group relative flex flex-col overflow-hidden border-t border-border bg-surface transition-all duration-300 hover:border-accent">
       <Link
         to="/products/$slug"
         params={{ slug: product.slug }}
@@ -26,7 +26,7 @@ export function ProductCard({ product, symbol = "$" }: { product: Product; symbo
             loading="lazy"
             width={1200}
             height={900}
-            className="h-full w-full rounded-xl object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+            className="h-full w-full rounded-sm object-contain transition-transform duration-500 group-hover:scale-[1.03]"
           />
         ) : null}
         <div className="absolute left-3 top-3 flex gap-2">

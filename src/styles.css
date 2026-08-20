@@ -6,8 +6,8 @@
 
 /*
  * MerchantStack design system.
- * Premium dark B2B commerce aesthetic: deep midnight navy surfaces,
- * electric indigo primary, cyan accent, warm signal for highlights.
+ * Premium editorial B2B marketplace: Ocean Deep navy, marine teal,
+ * clean typography and restrained physical depth.
  * All colors are oklch semantic tokens. Never hardcode colors in components.
  */
 
@@ -64,31 +64,31 @@
 }
 
 :root {
-  --radius: 0.9rem;
+  --radius: 0.35rem;
 
-  --background: oklch(0.16 0.032 268);
-  --foreground: oklch(0.97 0.008 260);
+  --background: oklch(0.2553 0.0621 255.53);
+  --foreground: oklch(0.97 0.008 210);
 
-  --surface: oklch(0.2 0.035 268);
-  --surface-2: oklch(0.24 0.038 269);
+  --surface: oklch(0.292 0.063 251);
+  --surface-2: oklch(0.395 0.0797 244.68);
 
-  --card: oklch(0.2 0.035 268);
-  --card-foreground: oklch(0.97 0.008 260);
-  --popover: oklch(0.19 0.034 268);
-  --popover-foreground: oklch(0.97 0.008 260);
+  --card: oklch(0.292 0.063 251);
+  --card-foreground: oklch(0.97 0.008 210);
+  --popover: oklch(0.275 0.061 253);
+  --popover-foreground: oklch(0.97 0.008 210);
 
-  --primary: oklch(0.62 0.212 273);
-  --primary-foreground: oklch(0.99 0.005 260);
-  --primary-glow: oklch(0.74 0.16 240);
+  --primary: oklch(0.7389 0.0917 191.76);
+  --primary-foreground: oklch(0.2553 0.0621 255.53);
+  --primary-glow: oklch(0.79 0.075 188);
 
-  --secondary: oklch(0.26 0.04 269);
-  --secondary-foreground: oklch(0.95 0.01 260);
+  --secondary: oklch(0.395 0.0797 244.68);
+  --secondary-foreground: oklch(0.96 0.01 210);
 
-  --muted: oklch(0.24 0.035 268);
-  --muted-foreground: oklch(0.72 0.024 264);
+  --muted: oklch(0.34 0.065 248);
+  --muted-foreground: oklch(0.77 0.035 218);
 
-  --accent: oklch(0.78 0.15 195);
-  --accent-foreground: oklch(0.17 0.035 268);
+  --accent: oklch(0.7389 0.0917 191.76);
+  --accent-foreground: oklch(0.2553 0.0621 255.53);
 
   --signal: oklch(0.83 0.16 84);
   --signal-foreground: oklch(0.18 0.04 268);
@@ -96,9 +96,9 @@
   --destructive: oklch(0.62 0.23 25);
   --destructive-foreground: oklch(0.98 0.005 260);
 
-  --border: oklch(0.33 0.036 268);
-  --input: oklch(0.3 0.035 268);
-  --ring: oklch(0.62 0.212 273);
+  --border: oklch(0.44 0.067 238);
+  --input: oklch(0.36 0.068 247);
+  --ring: oklch(0.7389 0.0917 191.76);
 
   --chart-1: oklch(0.62 0.212 273);
   --chart-2: oklch(0.78 0.15 195);
@@ -115,24 +115,11 @@
   --sidebar-border: oklch(0.3 0.035 268);
   --sidebar-ring: oklch(0.62 0.212 273);
 
-  --gradient-hero: radial-gradient(
-      120% 90% at 15% 0%,
-      color-mix(in oklab, var(--primary) 42%, transparent) 0%,
-      transparent 62%
-    ),
-    radial-gradient(
-      90% 70% at 90% 10%,
-      color-mix(in oklab, var(--accent) 28%, transparent) 0%,
-      transparent 60%
-    );
+  --gradient-hero: linear-gradient(115deg, var(--background), color-mix(in oklab, var(--surface-2) 38%, var(--background)));
   --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
-  --gradient-surface: linear-gradient(
-    160deg,
-    color-mix(in oklab, var(--surface-2) 90%, transparent),
-    color-mix(in oklab, var(--surface) 92%, transparent)
-  );
-  --shadow-elegant: 0 24px 60px -24px color-mix(in oklab, var(--primary) 50%, transparent);
-  --shadow-card: 0 12px 40px -20px oklch(0 0 0 / 0.75);
+  --gradient-surface: linear-gradient(160deg, var(--surface-2), var(--surface));
+  --shadow-elegant: 0 24px 60px -32px oklch(0.08 0.03 250 / 0.75);
+  --shadow-card: 0 14px 34px -26px oklch(0.08 0.03 250 / 0.9);
   --transition-smooth: 260ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -161,7 +148,7 @@
   h3,
   h4 {
     font-family: var(--font-display);
-    letter-spacing: -0.022em;
+    letter-spacing: 0;
   }
 }
 
