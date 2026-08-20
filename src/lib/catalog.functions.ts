@@ -1,18 +1,17 @@
 import { createServerFn } from "@tanstack/react-start";
 
-const PRODUCT_FIELDS =
-  "id,slug,name,category_id,short_description,description,price,compare_at_price,currency,thumbnail,features,whats_included,license_type,license_duration,delivery_method,product_type,tags,status,featured,best_seller,new_product,stock_status,whatsapp_message,seo_title,seo_description,seo_keywords,og_title,og_description,og_image,sort_order,created_at,categories(slug,name)";
-
 export const getStorefront = createServerFn({ method: "GET" }).handler(async () => {
   const { createPublicClient } = await import("./supabase-public.server");
   const supabase = createPublicClient();
+  const productFields =
+    "id,slug,name,category_id,short_description,description,price,compare_at_price,currency,thumbnail,features,whats_included,license_type,license_duration,delivery_method,product_type,tags,status,featured,best_seller,new_product,stock_status,whatsapp_message,seo_title,seo_description,seo_keywords,og_title,og_description,og_image,sort_order,created_at,categories(slug,name)";
 
   const [settings, categories, products] = await Promise.all([
     supabase.from("store_settings").select("*").eq("id", 1).maybeSingle(),
     supabase.from("categories").select("*").order("sort_order"),
     supabase
       .from("products")
-      .select(PRODUCT_FIELDS)
+      .select(productFields)
       .eq("status", "published")
       .order("sort_order")
       .limit(60),
@@ -30,10 +29,12 @@ export const getProductBySlug = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const { createPublicClient } = await import("./supabase-public.server");
     const supabase = createPublicClient();
+    const productFields =
+      "id,slug,name,category_id,short_description,description,price,compare_at_price,currency,thumbnail,features,whats_included,license_type,license_duration,delivery_method,product_type,tags,status,featured,best_seller,new_product,stock_status,whatsapp_message,seo_title,seo_description,seo_keywords,og_title,og_description,og_image,sort_order,created_at,categories(slug,name)";
 
     const { data: product } = await supabase
       .from("products")
-      .select(PRODUCT_FIELDS)
+      .select(productFields)
       .eq("slug", data.slug)
       .eq("status", "published")
       .maybeSingle();
@@ -43,7 +44,7 @@ export const getProductBySlug = createServerFn({ method: "GET" })
     const [related, settings] = await Promise.all([
       supabase
         .from("products")
-        .select(PRODUCT_FIELDS)
+        .select(productFields)
         .eq("status", "published")
         .eq("category_id", product.category_id)
         .neq("id", product.id)
@@ -76,38 +77,36 @@ export const placeOrder = createServerFn({ method: "POST" })
 
     const subtotal = items.reduce((sum, i) => sum + i.unit_price * i.quantity, 0);
     const number = orderNumber();
+    const customerId = crypto.randomUUID();
+    const orderId = crypto.randomUUID();
 
-    const { data: customer } = await supabase
-      .from("customers")
-      .insert({
+    const { error: customerError } = await supabase.from("customers").insert({
+        id: customerId,
         name: data.customer.name.slice(0, 120),
         phone: data.customer.phone.slice(0, 40),
         email: data.customer.email.slice(0, 160),
         notes: data.customer.notes.slice(0, 800),
-      })
-      .select("id")
-      .maybeSingle();
+      });
 
-    const { data: order, error } = await supabase
-      .from("orders")
-      .insert({
+    if (customerError) throw new Error("Could not save your checkout details.");
+
+    const { error: orderError } = await supabase.from("orders").insert({
+        id: orderId,
         order_number: number,
-        customer_id: customer?.id ?? null,
+        customer_id: customerId,
         customer_name: data.customer.name.slice(0, 120),
         customer_phone: data.customer.phone.slice(0, 40),
         customer_email: data.customer.email.slice(0, 160),
         subtotal,
         total: subtotal,
         notes: data.customer.notes.slice(0, 800),
-      })
-      .select("id,order_number")
-      .maybeSingle();
+      });
 
-    if (error || !order) throw new Error(error?.message ?? "Could not create the order.");
+    if (orderError) throw new Error("Could not create the order.");
 
-    await supabase.from("order_items").insert(
+    const { error: itemsError } = await supabase.from("order_items").insert(
       items.map((item) => ({
-        order_id: order.id,
+        order_id: orderId,
         product_id: item.product_id,
         product_name: item.product_name,
         unit_price: item.unit_price,
@@ -116,5 +115,7 @@ export const placeOrder = createServerFn({ method: "POST" })
       })),
     );
 
-    return { orderNumber: order.order_number, total: subtotal };
+    if (itemsError) throw new Error("Could not save the order items.");
+
+    return { orderNumber: number, total: subtotal };
   });
