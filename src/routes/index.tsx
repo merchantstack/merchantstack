@@ -5,6 +5,7 @@ import { ArrowRight, BadgeCheck, Check, MessageCircle, ShieldCheck, Zap } from "
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site/shell";
 import { ProductCard } from "@/components/site/product-card";
+import { formatPrice } from "@/lib/format";
 import { storefrontQuery, DEFAULT_SETTINGS } from "@/lib/storefront";
 import type { Category, Product, StoreSettings } from "@/lib/types";
 
