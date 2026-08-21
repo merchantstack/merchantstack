@@ -1,0 +1,2 @@
+update public.store_settings set brand_name='Commerce Nexa', store_email='merchantstackteam@gmail.com', contact_phone='+15817814936', whatsapp_number='15817814936', footer_content = jsonb_set(coalesce(footer_content,'{}'::jsonb),'{about}','"Commerce Nexa supplies vetted digital commerce tooling to merchants, agencies and operators."'::jsonb) where id=1;
+insert into public.user_roles (user_id, role) values ('4ab75a56-0f23-4a0b-b360-824571353c1f','admin') on conflict do nothing;
