@@ -20,13 +20,13 @@ import { buildOrderMessage, whatsappLink } from "@/lib/whatsapp";
 export const Route = createFileRoute("/cart")({
   head: () => ({
     meta: [
-      { title: "Your cart — MerchantStack checkout" },
+      { title: "Your cart — Commerce Nexa checkout" },
       {
         name: "description",
         content:
-          "Review your MerchantStack cart and complete checkout over WhatsApp with a structured order summary.",
+          "Review your Commerce Nexa cart and complete checkout over WhatsApp with a structured order summary.",
       },
-      { property: "og:title", content: "Your cart — MerchantStack" },
+      { property: "og:title", content: "Your cart — Commerce Nexa" },
       { property: "og:description", content: "Review your cart and check out over WhatsApp." },
       { property: "og:url", content: "/cart" },
       { name: "robots", content: "noindex" },

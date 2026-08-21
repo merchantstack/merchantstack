@@ -16,15 +16,15 @@ export const Route = createFileRoute("/categories/$slug")({
       .join(" ");
     return {
       meta: [
-        { title: `${label} products — MerchantStack` },
+        { title: `${label} products — Commerce Nexa` },
         {
           name: "description",
-          content: `Licensed ${label.toLowerCase()} tools and assets available on MerchantStack with instant delivery and WhatsApp checkout.`,
+          content: `Licensed ${label.toLowerCase()} tools and assets available on Commerce Nexa with instant delivery and WhatsApp checkout.`,
         },
-        { property: "og:title", content: `${label} products — MerchantStack` },
+        { property: "og:title", content: `${label} products — Commerce Nexa` },
         {
           property: "og:description",
-          content: `Browse ${label.toLowerCase()} products on MerchantStack.`,
+          content: `Browse ${label.toLowerCase()} products on Commerce Nexa.`,
         },
         { property: "og:url", content: `/categories/${params.slug}` },
       ],

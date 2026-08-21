@@ -16,7 +16,7 @@ export const productQuery = (slug: string) =>
   });
 
 export const DEFAULT_SETTINGS: StoreSettings = {
-  brand_name: "MerchantStack",
+  brand_name: "Commerce Nexa",
   tagline: "Commerce infrastructure for modern businesses.",
   logo_url: null,
   whatsapp_number: "",

@@ -47,7 +47,7 @@ function AdminLayout() {
             <span className="grid size-9 place-items-center rounded-xl bg-primary text-primary-foreground">
               <Layers className="size-5" />
             </span>
-            <span className="font-display font-semibold">MerchantStack admin</span>
+            <span className="font-display font-semibold">Commerce Nexa admin</span>
           </Link>
           <Button
             variant="ghost"

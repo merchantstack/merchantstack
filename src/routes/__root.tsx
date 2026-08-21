@@ -79,13 +79,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "MerchantStack — Premium digital commerce marketplace" },
+      { title: "Commerce Nexa — Premium digital commerce marketplace" },
       {
         name: "description",
         content:
-          "MerchantStack supplies licensed commerce tooling, feed managers, SEO systems and growth assets for modern merchants.",
+          "Commerce Nexa supplies licensed commerce tooling, feed managers, SEO systems and growth assets for modern merchants.",
       },
-      { property: "og:site_name", content: "MerchantStack" },
+      { property: "og:site_name", content: "Commerce Nexa" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -105,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          name: "MerchantStack",
+          name: "Commerce Nexa",
           description: "Premium B2B digital commerce marketplace.",
         }),
       },

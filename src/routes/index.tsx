@@ -13,13 +13,13 @@ export const Route = createFileRoute("/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(storefrontQuery),
   head: () => ({
     meta: [
-      { title: "MerchantStack — Premium commerce tooling marketplace" },
+      { title: "Commerce Nexa — Premium commerce tooling marketplace" },
       {
         name: "description",
         content:
           "Buy licensed product feed managers, SEO systems, Google Merchant tools and growth assets. Instant delivery, WhatsApp checkout.",
       },
-      { property: "og:title", content: "MerchantStack — Premium commerce tooling marketplace" },
+      { property: "og:title", content: "Commerce Nexa — Premium commerce tooling marketplace" },
       {
         property: "og:description",
         content:

@@ -24,10 +24,10 @@ export const Route = createFileRoute("/products/$slug")({
     const product = loaderData?.product as Product | undefined | null;
     if (!product) {
       return {
-        meta: [{ title: "Product unavailable — MerchantStack" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Product unavailable — Commerce Nexa" }, { name: "robots", content: "noindex" }],
       };
     }
-    const title = product.seo_title || `${product.name} — MerchantStack`;
+    const title = product.seo_title || `${product.name} — Commerce Nexa`;
     const description = product.seo_description || product.short_description;
     return {
       meta: [
@@ -55,7 +55,7 @@ export const Route = createFileRoute("/products/$slug")({
             name: product.name,
             description,
             image: product.thumbnail ?? undefined,
-            brand: { "@type": "Brand", name: "MerchantStack" },
+            brand: { "@type": "Brand", name: "Commerce Nexa" },
             offers: {
               "@type": "Offer",
               price: product.price,

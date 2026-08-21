@@ -12,10 +12,10 @@ import { supabase } from "@/integrations/supabase/client";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — MerchantStack admin" },
-      { name: "description", content: "Sign in to the MerchantStack admin console." },
-      { property: "og:title", content: "Sign in — MerchantStack admin" },
-      { property: "og:description", content: "Access the MerchantStack management console." },
+      { title: "Sign in — Commerce Nexa admin" },
+      { name: "description", content: "Sign in to the Commerce Nexa admin console." },
+      { property: "og:title", content: "Sign in — Commerce Nexa admin" },
+      { property: "og:description", content: "Access the Commerce Nexa management console." },
       { property: "og:url", content: "/auth" },
       { name: "robots", content: "noindex" },
     ],
@@ -63,7 +63,7 @@ function AuthPage() {
           <span className="grid size-9 place-items-center rounded-xl bg-primary text-primary-foreground">
             <Layers className="size-5" />
           </span>
-          <span className="font-display text-lg font-semibold">MerchantStack</span>
+          <span className="font-display text-lg font-semibold">Commerce Nexa</span>
         </div>
         <h1 className="mt-6 text-2xl font-semibold">Admin console</h1>
         <p className="mt-2 text-sm text-muted-foreground">
