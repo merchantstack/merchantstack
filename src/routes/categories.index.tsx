@@ -9,16 +9,16 @@ export const Route = createFileRoute("/categories/")({
   loader: ({ context }) => context.queryClient.ensureQueryData(storefrontQuery),
   head: () => ({
     meta: [
-      { title: "Categories — MerchantStack commerce catalogue" },
+      { title: "Categories — Commerce Nexa commerce catalogue" },
       {
         name: "description",
         content:
-          "Explore MerchantStack categories: Google Merchant, SEO, product feeds, Shopify, marketing, analytics, security and more.",
+          "Explore Commerce Nexa categories: Google Merchant, SEO, product feeds, Shopify, marketing, analytics, security and more.",
       },
-      { property: "og:title", content: "Categories — MerchantStack" },
+      { property: "og:title", content: "Categories — Commerce Nexa" },
       {
         property: "og:description",
-        content: "Every product category in the MerchantStack marketplace.",
+        content: "Every product category in the Commerce Nexa marketplace.",
       },
       { property: "og:url", content: "/categories" },
     ],

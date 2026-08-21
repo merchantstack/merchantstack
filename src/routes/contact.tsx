@@ -15,14 +15,14 @@ import { whatsappLink } from "@/lib/whatsapp";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact MerchantStack — talk to the team" },
+      { title: "Contact Commerce Nexa — talk to the team" },
       {
         name: "description",
         content:
-          "Contact MerchantStack about licensing, bulk orders, custom commerce tooling or partner enquiries.",
+          "Contact Commerce Nexa about licensing, bulk orders, custom commerce tooling or partner enquiries.",
       },
-      { property: "og:title", content: "Contact MerchantStack" },
-      { property: "og:description", content: "Talk to the MerchantStack team over WhatsApp." },
+      { property: "og:title", content: "Contact Commerce Nexa" },
+      { property: "og:description", content: "Talk to the Commerce Nexa team over WhatsApp." },
       { property: "og:url", content: "/contact" },
     ],
     links: [{ rel: "canonical", href: "/contact" }],

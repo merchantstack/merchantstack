@@ -7,13 +7,13 @@ import { SiteShell } from "@/components/site/shell";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About MerchantStack — commerce tooling supplier" },
+      { title: "About Commerce Nexa — commerce tooling supplier" },
       {
         name: "description",
         content:
-          "MerchantStack curates and licenses production-ready commerce tooling for merchants, agencies and ecommerce operators worldwide.",
+          "Commerce Nexa curates and licenses production-ready commerce tooling for merchants, agencies and ecommerce operators worldwide.",
       },
-      { property: "og:title", content: "About MerchantStack" },
+      { property: "og:title", content: "About Commerce Nexa" },
       {
         property: "og:description",
         content: "Who we are and how we source licensed commerce tooling.",
@@ -57,7 +57,7 @@ function AboutPage() {
             We supply the tooling behind modern merchants
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-muted-foreground">
-            MerchantStack is a curated marketplace for licensed digital commerce products: feed
+            Commerce Nexa is a curated marketplace for licensed digital commerce products: feed
             managers, SEO systems, Google Merchant utilities, storefront themes and growth assets.
           </p>
         </div>
