@@ -1,10 +1,11 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BadgeCheck, MessageCircle, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight, BadgeCheck, Check, MessageCircle, ShieldCheck, Zap } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { SiteShell } from "@/components/site/shell";
 import { ProductCard } from "@/components/site/product-card";
+import { formatPrice } from "@/lib/format";
 import { storefrontQuery, DEFAULT_SETTINGS } from "@/lib/storefront";
 import type { Category, Product, StoreSettings } from "@/lib/types";
 
@@ -78,66 +79,106 @@ function HomePage() {
 
   return (
     <SiteShell>
-      <section className="hero-glow relative overflow-hidden border-b border-border/60">
-        <div className="grid-lines pointer-events-none absolute inset-0 opacity-25" />
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 py-20 sm:px-6 lg:grid-cols-2 lg:py-28">
-          <div>
-            <span className="inline-flex items-center gap-2 rounded-full border border-border bg-surface/70 px-3 py-1 text-xs font-medium tracking-wide text-accent">
-              <span className="size-1.5 rounded-full bg-accent" />
-              {products.length} licensed products in stock
-            </span>
-            <h1 className="mt-6 text-4xl leading-[1.05] font-semibold sm:text-5xl lg:text-6xl">
-              {home["hero_title"] ?? "Commerce infrastructure for merchants who move fast"}
+      <section className="hero-glow border-b border-border">
+        <div className="mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 lg:grid-cols-12 lg:items-center lg:py-24">
+          <div className="lg:col-span-7">
+            <div className="flex items-center gap-3 text-xs font-semibold uppercase text-accent">
+              <span className="h-px w-12 bg-accent" />
+              <BadgeCheck className="size-4" />
+              Verified B2B commerce partner
+            </div>
+            <h1 className="mt-7 max-w-3xl text-5xl leading-[1.04] font-bold sm:text-6xl lg:text-7xl">
+              Commerce systems, <span className="text-accent">selected for growth.</span>
             </h1>
-            <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
-              {home["hero_subtitle"] ?? settings.tagline}
+            <p className="mt-7 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+              {home["hero_subtitle"] ??
+                "Practical SEO, analytics, Klaviyo and product-feed systems—reviewed, clearly priced and supported by real specialists."}
             </p>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap items-center gap-5">
               <Button size="lg" asChild>
                 <Link to="/shop">
-                  {home["hero_cta"] ?? "Browse the catalogue"}
+                  {home["hero_cta"] ?? "Explore marketplace"}
                   <ArrowRight className="size-4" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link to="/categories">Explore categories</Link>
-              </Button>
+              <Link
+                to="/categories"
+                className="inline-flex items-center gap-2 border-b border-accent pb-1 text-sm font-semibold transition-colors hover:text-accent"
+              >
+                View categories <ArrowRight className="size-4" />
+              </Link>
             </div>
 
-            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border/70 pt-8">
+            <dl className="mt-12 grid max-w-xl grid-cols-3 gap-4 border-t border-border pt-8">
               {[
-                ["Products", home["stat_products"] ?? `${products.length}+`],
-                ["Categories", home["stat_categories"] ?? `${categories.length}`],
-                ["Delivery", home["stat_delivery"] ?? "Instant"],
+                ["Products", `${products.length}`],
+                ["Specialist areas", `${categories.length}`],
+                ["Order support", "WhatsApp"],
               ].map(([label, value]) => (
                 <div key={label}>
-                  <dt className="text-xs uppercase tracking-[0.16em] text-muted-foreground">
-                    {label}
-                  </dt>
-                  <dd className="mt-1 font-display text-2xl font-semibold">{value}</dd>
+                  <dd className="font-display text-xl font-semibold text-accent sm:text-2xl">{value}</dd>
+                  <dt className="mt-1 text-[11px] font-semibold uppercase text-muted-foreground">{label}</dt>
                 </div>
               ))}
             </dl>
           </div>
 
-          <div className="relative">
-            <div className="surface-panel overflow-hidden rounded-3xl">
-              <img
-                src="/images/hero.jpg"
-                alt="Abstract visualisation of commerce dashboards and data panels"
-                width={1920}
-                height={1080}
-                className="h-full w-full object-cover"
-              />
-            </div>
+          <div className="grid grid-cols-2 gap-3 lg:col-span-5">
+            {shown[0] ? (
+              <Link
+                to="/products/$slug"
+                params={{ slug: shown[0].slug }}
+                className="group relative col-span-2 aspect-[4/3] overflow-hidden bg-surface-2"
+              >
+                {shown[0].thumbnail ? (
+                  <img
+                    src={shown[0].thumbnail}
+                    alt={`${shown[0].name} preview`}
+                    width={1200}
+                    height={900}
+                    className="h-full w-full object-contain p-4 transition-transform duration-500 group-hover:scale-[1.03]"
+                  />
+                ) : null}
+                <div className="absolute inset-x-0 bottom-0 bg-background/95 p-5">
+                  <span className="text-[10px] font-bold uppercase text-accent">Editor’s selection</span>
+                  <div className="mt-1 flex items-end justify-between gap-4">
+                    <h2 className="text-lg font-semibold sm:text-xl">{shown[0].name}</h2>
+                    <span className="shrink-0 font-display font-semibold text-accent">
+                      {formatPrice(shown[0].price, symbol)}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ) : null}
+            {shown.slice(1, 3).map((product) => (
+              <Link
+                key={product.id}
+                to="/products/$slug"
+                params={{ slug: product.slug }}
+                className="group flex aspect-square flex-col justify-end overflow-hidden bg-surface-2"
+              >
+                {product.thumbnail ? (
+                  <img
+                    src={product.thumbnail}
+                    alt={`${product.name} preview`}
+                    width={600}
+                    height={600}
+                    className="min-h-0 flex-1 object-contain p-3 transition-transform duration-500 group-hover:scale-[1.04]"
+                  />
+                ) : null}
+                <div className="border-t border-border bg-surface px-4 py-3">
+                  <p className="line-clamp-1 text-sm font-semibold">{product.name}</p>
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="border-b border-border bg-surface">
+        <div className="mx-auto grid max-w-7xl gap-0 px-4 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
           {VALUE_PROPS.map((item) => (
-            <div key={item.title} className="surface-panel rounded-2xl p-6">
+            <div key={item.title} className="border-b border-border py-7 sm:px-6 lg:border-b-0 lg:border-r first:pl-0 last:border-r-0">
               <item.icon className="size-5 text-accent" />
               <h2 className="mt-4 text-base font-semibold">{item.title}</h2>
               <p className="mt-2 text-sm text-muted-foreground">{item.body}</p>
@@ -146,7 +187,7 @@ function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-4 sm:px-6">
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 className="text-2xl font-semibold sm:text-3xl">Featured this month</h2>
@@ -160,22 +201,26 @@ function HomePage() {
             </Link>
           </Button>
         </div>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
           {shown.map((product) => (
             <ProductCard key={product.id} product={product} symbol={symbol} />
           ))}
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <h2 className="text-2xl font-semibold sm:text-3xl">Shop by category</h2>
-        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <section className="border-y border-border bg-surface">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
+        <div className="max-w-2xl">
+          <span className="text-xs font-semibold uppercase text-accent">Specialist departments</span>
+          <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">Shop by category</h2>
+        </div>
+        <div className="mt-8 grid gap-px overflow-hidden border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category) => (
             <Link
               key={category.id}
               to="/categories/$slug"
               params={{ slug: category.slug }}
-              className="group surface-panel relative overflow-hidden rounded-2xl transition-all hover:-translate-y-1 hover:border-primary/50"
+              className="group relative overflow-hidden bg-background transition-colors hover:bg-surface-2"
             >
               {category.image_url ? (
                 <img
@@ -184,7 +229,7 @@ function HomePage() {
                   loading="lazy"
                   width={1200}
                   height={900}
-                  className="h-40 w-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
+                  className="h-40 w-full object-contain p-3 transition-transform duration-500 group-hover:scale-[1.03]"
                 />
               ) : null}
               <div className="p-5">
@@ -195,7 +240,7 @@ function HomePage() {
               </div>
             </Link>
           ))}
-        </div>
+        </div></div>
       </section>
 
       <section className="border-y border-border/60 bg-surface/40">
@@ -223,7 +268,7 @@ function HomePage() {
                 "Templates arrive instantly. Services start with a short scoping call and an agreed timeline.",
               ],
             ].map(([step, title, body]) => (
-              <li key={step} className="surface-panel rounded-2xl p-6">
+              <li key={step} className="border-t border-border py-6">
                 <span className="font-display text-sm font-semibold text-accent">{step}</span>
                 <h3 className="mt-3 text-base font-semibold">{title}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{body}</p>
@@ -234,34 +279,28 @@ function HomePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-        <h2 className="text-2xl font-semibold sm:text-3xl">What merchants say</h2>
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
+        <span className="text-xs font-semibold uppercase text-accent">Our standard</span>
+        <h2 className="mt-3 text-2xl font-semibold sm:text-3xl">What verified partnership means</h2>
+        <div className="mt-8 grid gap-px overflow-hidden border border-border bg-border md:grid-cols-3">
           {[
             [
-              "We swapped three half-finished Klaviyo flows for the abandoned cart and win-back templates. Recovered revenue was up inside the first fortnight.",
-              "Tolu A.",
-              "Head of Growth, apparel DTC",
+              "Clear scope before payment",
+              "Every product states what is included, how it is delivered and where custom implementation begins.",
             ],
             [
-              "The Merchant Center feed cleanup paid for itself. Disapprovals went from 400-odd items to single digits.",
-              "Daniel R.",
-              "Ecommerce Manager, home goods",
+              "A real person at checkout",
+              "Orders move to WhatsApp so licensing, compatibility and timelines can be confirmed without a ticket queue.",
             ],
             [
-              "Ordering over WhatsApp felt odd at first, then genuinely faster. Questions answered, files sent, done in an afternoon.",
-              "Priya S.",
-              "Founder, skincare brand",
+              "Delivery with accountability",
+              "Digital assets include setup guidance; service engagements include agreed deliverables and a practical handover.",
             ],
-          ].map(([quote, name, role]) => (
-            <figure key={name} className="surface-panel flex h-full flex-col rounded-2xl p-6">
-              <blockquote className="text-sm leading-relaxed text-foreground/90">
-                “{quote}”
-              </blockquote>
-              <figcaption className="mt-5 border-t border-border/60 pt-4 text-sm">
-                <span className="font-medium">{name}</span>
-                <span className="block text-xs text-muted-foreground">{role}</span>
-              </figcaption>
-            </figure>
+          ].map(([title, body]) => (
+            <div key={title} className="bg-surface p-7">
+              <Check className="size-5 text-accent" />
+              <h3 className="mt-5 text-base font-semibold">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{body}</p>
+            </div>
           ))}
         </div>
       </section>
@@ -287,7 +326,7 @@ function HomePage() {
               "Tell us your setup before ordering. If it is not a fit we will say so, and we can quote a customised version instead.",
             ],
           ].map(([q, a]) => (
-            <div key={q} className="surface-panel rounded-2xl p-6">
+            <div key={q} className="border-t border-border py-6">
               <h3 className="text-base font-semibold">{q}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{a}</p>
             </div>
