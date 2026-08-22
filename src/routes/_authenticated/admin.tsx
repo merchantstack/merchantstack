@@ -31,10 +31,12 @@ function AdminLayout() {
     queryFn: async () => {
       const { data: user } = await supabase.auth.getUser();
       if (!user.user) return false;
-      const { data } = await supabase.rpc("has_role", {
-        _user_id: user.user.id,
-        _role: "admin",
-      });
+      const { data } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.user.id)
+        .eq("role", "admin")
+        .maybeSingle();
       return Boolean(data);
     },
   });
