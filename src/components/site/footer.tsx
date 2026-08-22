@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { Layers, Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+
+import brandLogo from "@/assets/commerce-nexa-logo.png.asset.json";
 
 import { storefrontQuery, DEFAULT_SETTINGS } from "@/lib/storefront";
 
@@ -14,9 +16,13 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-4">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2.5">
-            <span className="grid size-9 place-items-center rounded-sm bg-primary text-primary-foreground">
-              <Layers className="size-5" />
-            </span>
+            <img
+              src={brandLogo.url}
+              alt={`${settings.brand_name} logo`}
+              className="size-9 rounded-sm object-contain"
+              width={36}
+              height={36}
+            />
             <span className="font-display text-lg font-semibold">{settings.brand_name}</span>
           </div>
           <p className="mt-4 max-w-md text-sm text-muted-foreground">
