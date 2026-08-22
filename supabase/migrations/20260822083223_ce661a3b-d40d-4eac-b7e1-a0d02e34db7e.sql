@@ -1,0 +1,1 @@
+UPDATE public.store_settings SET store_email = 'support@commercenexa.com' WHERE id = 1;
