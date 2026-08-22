@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { BadgeCheck, Layers, Menu, ShoppingBag } from "lucide-react";
+import { BadgeCheck, Menu, ShoppingBag } from "lucide-react";
+
+import brandLogo from "@/assets/commerce-nexa-logo.png.asset.json";
 import { useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
@@ -27,9 +29,13 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
       <div className="mx-auto flex h-18 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link to="/" className="flex items-center gap-2.5">
-          <span className="grid size-9 place-items-center rounded-sm bg-primary text-primary-foreground">
-            <Layers className="size-5" />
-          </span>
+          <img
+            src={brandLogo.url}
+            alt={`${settings.brand_name} logo`}
+            className="size-9 rounded-sm object-contain"
+            width={36}
+            height={36}
+          />
           <span className="font-display text-lg font-semibold">
             {settings.brand_name}
           </span>
